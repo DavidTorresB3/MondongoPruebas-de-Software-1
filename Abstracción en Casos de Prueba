@@ -1,0 +1,27 @@
+public abstract class CasoDePrueba {
+    public abstract void ejecutarPrueba();
+}
+
+public class PruebaManual extends CasoDePrueba {
+    @Override
+    public void ejecutarPrueba() {
+        System.out.println("Ejecutando prueba manual...");
+    }
+}
+
+public class PruebaAutomatizada extends CasoDePrueba {
+    @Override
+    public void ejecutarPrueba() {
+        System.out.println("Ejecutando prueba automatizada con Selenium...");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        CasoDePrueba pruebaManual = new PruebaManual();
+        CasoDePrueba pruebaAutomatizada = new PruebaAutomatizada();
+
+        pruebaManual.ejecutarPrueba();
+        pruebaAutomatizada.ejecutarPrueba();
+    }
+}
