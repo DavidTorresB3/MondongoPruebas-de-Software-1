@@ -1,0 +1,38 @@
+public class TestCase {
+    protected int id;
+    protected String nombre;
+    protected String estado;
+
+    public TestCase(int id, String nombre, String estado) {
+        this.id = id;
+        this.nombre = nombre;
+        this.estado = estado;
+    }
+
+    public String toString() {
+        return "ID: " + id + ", Nombre: " + nombre + ", Estado: " + estado;
+    }
+}
+
+public class PruebaAutomatizada extends TestCase {
+    private String framework;
+
+    public PruebaAutomatizada(int id, String nombre, String estado, String framework) {
+        super(id, nombre, estado);
+        this.framework = framework;
+    }
+
+    public void mostrarInformacion() {
+        System.out.println("Caso: " + nombre + " - Framework: " + framework);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        TestCase pruebaManual = new TestCase(1, "Prueba Manual Login", "PASSED");
+        PruebaAutomatizada pruebaAuto = new PruebaAutomatizada(2, "Login Automatizado", "PASSED", "Selenium");
+
+        System.out.println("Prueba Manual: " + pruebaManual);
+        pruebaAuto.mostrarInformacion();
+    }
+}
