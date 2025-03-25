@@ -1,0 +1,16 @@
+public class Main {
+    public static double dividir(int a, int b) {
+        try {
+            return (double) a / b;
+        } catch (ArithmeticException e) {
+            System.out.println("Error: División por cero no permitida.");
+            return Double.NaN;
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println("10 / 2 = " + dividir(10, 2));
+        System.out.println("15 / 3 = " + dividir(15, 3));
+        System.out.println("5 / 0 = " + dividir(5, 0));
+    }
+}
