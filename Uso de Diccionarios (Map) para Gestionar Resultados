@@ -1,0 +1,57 @@
+import java.util.HashMap;
+import java.util.Map;
+
+public class TestResultsManager {
+    private Map<Integer, String> resultados;
+
+    public TestResultsManager() {
+        resultados = new HashMap<>();
+    }
+
+    public void agregarResultado(int idCaso, String estado) {
+        if (validarEstado(estado)) {
+            resultados.put(idCaso, estado);
+        } else {
+            throw new IllegalArgumentException("Estado inválido.");
+        }
+    }
+
+    public void actualizarResultado(int idCaso, String nuevoEstado) {
+        if (resultados.containsKey(idCaso) && validarEstado(nuevoEstado)) {
+            resultados.put(idCaso, nuevoEstado);
+        } else {
+            throw new IllegalArgumentException("Caso no encontrado o estado inválido.");
+        }
+    }
+
+    public void mostrarResultados() {
+        for (Map.Entry<Integer, String> entrada : resultados.entrySet()) {
+            System.out.println("Caso " + entrada.getKey() + ": " + entrada.getValue());
+        }
+    }
+
+    private boolean validarEstado(String estado) {
+        return estado.equals("PASSED") || estado.equals("FAILED") || estado.equals("BLOCKED");
+    }
+
+    public static void main(String[] args) {
+        TestResultsManager manager = new TestResultsManager();
+
+        // Simulación de ejecución de casos de prueba
+        manager.agregarResultado(1, "PASSED");
+        manager.agregarResultado(2, "FAILED");
+        manager.agregarResultado(3, "BLOCKED");
+        manager.agregarResultado(4, "PASSED");
+        manager.agregarResultado(5, "FAILED");
+
+        System.out.println("Resultados iniciales:");
+        manager.mostrarResultados();
+
+        // Actualización de estados
+        manager.actualizarResultado(2, "PASSED");
+        manager.actualizarResultado(5, "BLOCKED");
+
+        System.out.println("\nResultados actualizados:");
+        manager.mostrarResultados();
+    }
+}
