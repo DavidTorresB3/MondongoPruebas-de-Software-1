@@ -1,0 +1,26 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class TestResultAnalyzer {
+    public static void main(String[] args) {
+        ArrayList<String> resultados = new ArrayList<>(
+            Arrays.asList("PASSED", "FAILED", "BLOCKED", "PASSED", "FAILED")
+        );
+
+        int totalPruebas = resultados.size();
+        int passed = 0, failed = 0, blocked = 0;
+
+        for (String resultado : resultados) {
+            switch (resultado) {
+                case "PASSED": passed++; break;
+                case "FAILED": failed++; break;
+                case "BLOCKED": blocked++; break;
+            }
+        }
+
+        System.out.println("Total de pruebas ejecutadas: " + totalPruebas);
+        System.out.println("PASSED: " + passed);
+        System.out.println("FAILED: " + failed);
+        System.out.println("BLOCKED: " + blocked);
+    }
+}
