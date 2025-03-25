@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String estado = validarEstado(scanner);
+        System.out.println("Estado válido ingresado: " + estado);
+    }
+
+    public static String validarEstado(Scanner scanner) {
+        while (true) {
+            System.out.print("Ingrese el estado de la prueba (PASSED/FAILED/BLOCKED): ");
+            String estado = scanner.nextLine().toUpperCase();
+
+            try {
+                if (estado.equals("PASSED") || estado.equals("FAILED") || estado.equals("BLOCKED")) {
+                    return estado;
+                } else {
+                    throw new IllegalArgumentException("Estado no válido.");
+                }
+            } catch (IllegalArgumentException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+        }
+    }
+}
