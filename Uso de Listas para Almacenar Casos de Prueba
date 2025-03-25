@@ -1,0 +1,73 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class TestCase {
+    private int id;
+    private String nombre;
+    private String estado;
+
+    public TestCase(int id, String nombre, String estado) {
+        this.id = id;
+        this.nombre = nombre;
+        setEstado(estado);
+    }
+
+    public void setEstado(String estado) {
+        if (estado.equals("PASSED") || estado.equals("FAILED") || estado.equals("BLOCKED")) {
+            this.estado = estado;
+        } else {
+            throw new IllegalArgumentException("Estado inválido.");
+        }
+    }
+
+    public int getId() { return id; }
+    public String getNombre() { return nombre; }
+    public String getEstado() { return estado; }
+
+    @Override
+    public String toString() {
+        return "ID: " + id + ", Nombre: " + nombre + ", Estado: " + estado;
+    }
+}
+
+public class TestSuite {
+    private List<TestCase> casos;
+
+    public TestSuite() {
+        casos = new ArrayList<>();
+    }
+
+    public void agregarCaso(TestCase caso) {
+        casos.add(caso);
+    }
+
+    public void eliminarCaso(int id) {
+        casos.removeIf(caso -> caso.getId() == id);
+    }
+
+    public void mostrarCasos() {
+        for (TestCase caso : casos) {
+            System.out.println(caso);
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        TestSuite suite = new TestSuite();
+
+        // Agregar casos de prueba
+        suite.agregarCaso(new TestCase(1, "Login Exitoso", "PASSED"));
+        suite.agregarCaso(new TestCase(2, "Registro Usuario", "FAILED"));
+        suite.agregarCaso(new TestCase(3, "Recuperar Contraseña", "BLOCKED"));
+
+        // Mostrar casos
+        System.out.println("Casos de Prueba:");
+        suite.mostrarCasos();
+
+        // Demostrar eliminación
+        suite.eliminarCaso(2);
+        System.out.println("\nDespués de eliminar caso 2:");
+        suite.mostrarCasos();
+    }
+}
